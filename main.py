@@ -12,19 +12,25 @@ HOST = os.getenv("SUPABASE_HOST")
 PORT = os.getenv("SUPABASE_PORT")
 DBNAME = os.getenv("SUPABASE_DBNAME")
 
-try:
-    connection = psycopg2.connect(
-        user=USER,
-        password=PASSWORD,
-        host=HOST,
-        port=PORT,
-        dbname=DBNAME
-    )
-    print("Connection to Supabase database successful!")
-    cursor = connection.cursor()
-except Exception as e:
-    print(f"Database connection error: {e}")
-    print(type(e).__name__, e)
+connection = None
+cursor = None
+
+def connect():
+    global connection 
+    global cursor    
+    try:
+        connection = psycopg2.connect(
+            user=USER,
+            password=PASSWORD,
+            host=HOST,
+            port=PORT,
+            dbname=DBNAME
+        )
+        print("Connection to Supabase database successful!")
+        cursor = connection.cursor()
+    except Exception as e:
+        print(f"Database connection error: {e}")
+        print(type(e).__name__, e)
 
 def insert_period(period, incomes, expenses, comment):
     global connection 
@@ -98,3 +104,5 @@ def get_period(period):
         print(f"Failed to fetch period: {e}")
         connection.rollback()
         return None
+
+connect
