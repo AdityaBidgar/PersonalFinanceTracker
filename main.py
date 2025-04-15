@@ -84,7 +84,6 @@ def get_period(period):
             expenses = result[2] if result[2] else {}
             comment = result[3] if result[3] else "No comment"
 
-            # Ensure `incomes` and `expenses` are dictionaries
             if not isinstance(incomes, dict):
                 print("Warning: `incomes` is not a dictionary:", incomes)
                 incomes = {}
