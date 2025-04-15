@@ -15,6 +15,7 @@ DBNAME = os.getenv("SUPABASE_DBNAME")
 connection = None
 cursor = None
 
+
 def connect():
     global connection 
     global cursor    
@@ -31,6 +32,8 @@ def connect():
     except Exception as e:
         print(f"Database connection error: {e}")
         print(type(e).__name__, e)
+
+connect
 
 def insert_period(period, incomes, expenses, comment):
     global connection 
@@ -105,4 +108,4 @@ def get_period(period):
         connection.rollback()
         return None
 
-connect
+
