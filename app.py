@@ -90,11 +90,11 @@ if selected == "Stored Data":
 
            
                 if not isinstance(incomes, dict):
-                    st.warning("⚠️ Warning: Income data is not in the expected format.")
+                    st.warning("Warning: Income data is not in the expected format.")
                     incomes = {}
 
                 if not isinstance(expenses, dict):
-                    st.warning("⚠️ Warning: Expense data is not in the expected format.")
+                    st.warning("Warning: Expense data is not in the expected format.")
                     expenses = {}
 
                 total_income = sum(incomes.values())  
