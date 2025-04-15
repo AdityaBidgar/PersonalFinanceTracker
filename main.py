@@ -17,6 +17,8 @@ DBNAME = os.getenv("SUPABASE_DBNAME")
 
 # Connect to the Supabase PostgreSQL database
 # Connect to the Supabase PostgreSQL database
+connection = None
+cursor = None
 try:
     connection = psycopg2.connect(
         user=USER,
@@ -29,6 +31,7 @@ try:
     cursor = connection.cursor()
 except Exception as e:
     print(f"Database connection error: {e}")
+    print(type(e).__name__, e)
 
 
 
