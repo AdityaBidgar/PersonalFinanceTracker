@@ -26,11 +26,11 @@ try:
         dbname=DBNAME
     )
     print("Connection to Supabase database successful!")
-
+    cursor = connection.cursor()
 except Exception as e:
     print(f"Database connection error: {e}")
 
-cursor = connection.cursor()
+
 
 def insert_period(period, incomes, expenses, comment):
     try:
