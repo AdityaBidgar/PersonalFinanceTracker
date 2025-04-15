@@ -4,9 +4,7 @@ from dotenv import load_dotenv
 import os
 import json  
 
-
 load_dotenv(".env")
-
 
 USER = os.getenv("SUPABASE_USER")
 PASSWORD = os.getenv("SUPABASE_PASSWORD")
@@ -14,14 +12,7 @@ HOST = os.getenv("SUPABASE_HOST")
 PORT = os.getenv("SUPABASE_PORT")
 DBNAME = os.getenv("SUPABASE_DBNAME")
 
-connection = None
-cursor = None
-
-
-
 try:
-    global connection 
-    global cursor
     connection = psycopg2.connect(
         user=USER,
         password=PASSWORD,
@@ -35,11 +26,10 @@ except Exception as e:
     print(f"Database connection error: {e}")
     print(type(e).__name__, e)
 
-
-
 def insert_period(period, incomes, expenses, comment):
-    try:
-        
+    global connection 
+    global cursor
+    try:        
         incomes_jsonb = psycopg2.extras.Json(incomes)
         expenses_jsonb = psycopg2.extras.Json(expenses)
         
@@ -53,8 +43,9 @@ def insert_period(period, incomes, expenses, comment):
         print(f"Failed to insert period: {e}")
         connection.rollback()
 
-
 def fetch_all_periods():
+    global connection 
+    global cursor    
     try:
         cursor.execute("SELECT period FROM reports")
         rows = cursor.fetchall()
@@ -70,9 +61,9 @@ def fetch_all_periods():
         connection.rollback()
         return []
 
-
-
 def get_period(period):
+    global connection 
+    global cursor    
     try:
         print(f"Fetching data for period: {period}")  
         
@@ -107,5 +98,3 @@ def get_period(period):
         print(f"Failed to fetch period: {e}")
         connection.rollback()
         return None
-
-

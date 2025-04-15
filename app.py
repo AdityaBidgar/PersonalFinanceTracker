@@ -26,7 +26,7 @@ months = list(calendar.month_name[1:])
 
 def get_all_periods():
     items = db.fetch_all_periods()
-    print("📌 Extracted periods:", items)
+    print("Extracted periods:", items)
     return items
 
 
