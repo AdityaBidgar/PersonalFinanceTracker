@@ -17,9 +17,10 @@ DBNAME = os.getenv("SUPABASE_DBNAME")
 
 # Connect to the Supabase PostgreSQL database
 # Connect to the Supabase PostgreSQL database
-connection = None
-cursor = None
+
 try:
+    global connection 
+    global cursor
     connection = psycopg2.connect(
         user=USER,
         password=PASSWORD,
