@@ -15,8 +15,7 @@ DBNAME = os.getenv("SUPABASE_DBNAME")
 connection = None
 cursor = None
 
-
-def connect():
+def initialize_connection():
     global connection 
     global cursor    
     try:
@@ -33,7 +32,16 @@ def connect():
         print(f"Database connection error: {e}")
         print(type(e).__name__, e)
 
-connect
+initialize_connection()
+
+def close_connection():
+    global connection 
+    global cursor    
+    if cursor:
+        cursor.close()
+    if connection:
+        connection.close()
+    print("Database connection closed.")
 
 def insert_period(period, incomes, expenses, comment):
     global connection 
@@ -50,7 +58,7 @@ def insert_period(period, incomes, expenses, comment):
         print(f"Period {period} inserted successfully!")
     except Exception as e:
         print(f"Failed to insert period: {e}")
-        connection.rollback()
+        close_connection()
 
 def fetch_all_periods():
     global connection 
@@ -67,7 +75,7 @@ def fetch_all_periods():
         return periods
     except Exception as e:
         print(f"Failed to fetch all periods: {e}")
-        connection.rollback()
+        close_connection()
         return []
 
 def get_period(period):
@@ -105,7 +113,7 @@ def get_period(period):
             return None
     except Exception as e:
         print(f"Failed to fetch period: {e}")
-        connection.rollback()
+        close_connection()
         return None
 
 
