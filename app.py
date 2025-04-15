@@ -4,12 +4,12 @@ from datetime import datetime
 import streamlit as st
 from streamlit_option_menu import option_menu
 import plotly.graph_objects as go
-import json  # To load the string as JSON
+import json 
 
 import main as db 
-print(dir(db)) # Assuming main contains the DB functions
+print(dir(db)) 
 
-# Settings
+
 incomes = ["Salary", "Business", "Investments", "Other Income"]
 expenses = ["Rent", "Utilities", "Groceries", "Car", "Entertainment", "Other Expenses"]
 currency = "INR(₹)"
@@ -20,16 +20,16 @@ layout = "centered"
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
 st.title(page_title + " " + page_icon)
 
-# Time and Date
-years = [datetime.today().year - i for i in range(5)]  # Changed
+
+years = [datetime.today().year - i for i in range(5)]  
 months = list(calendar.month_name[1:])
 
 def get_all_periods():
     items = db.fetch_all_periods()
-    print("📌 Extracted periods:", items)  # Debugging
+    print("📌 Extracted periods:", items)
     return items
 
-# Hide Streamlit Style
+
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -88,7 +88,7 @@ if selected == "Stored Data":
                 incomes = period_data["incomes"]
                 expenses = period_data["expenses"]
 
-                # ✅ Ensure they are dictionaries before using `.values()`
+           
                 if not isinstance(incomes, dict):
                     st.warning("⚠️ Warning: Income data is not in the expected format.")
                     incomes = {}
