@@ -14,6 +14,8 @@ HOST = os.getenv("SUPABASE_HOST")
 PORT = os.getenv("SUPABASE_PORT")
 DBNAME = os.getenv("SUPABASE_DBNAME")
 
+connection = None
+cursor = None
 
 
 
